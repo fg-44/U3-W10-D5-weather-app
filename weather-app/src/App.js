@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import TimeLocation from './Components/TimeLocation';
 import TopButton from './Components/TopButton';
 import Input from './Components/Input';
+import TemperatureDetails from './Components/TemperatureDetails';
+import Forecast from './Components/Forecast';
 import Container from 'react-bootstrap/Container';
 
 import './App.css';
@@ -18,8 +20,11 @@ function App() {
         <TopButton></TopButton>
         <Input></Input>
         <TimeLocation></TimeLocation>
-          
-<h1>Hello?</h1>
+        <TemperatureDetails></TemperatureDetails>
+
+        <Forecast title='Hourly Forecast'/>
+        <Forecast title='Daily Forecast'/>
+
         </header>
         </div>
 
