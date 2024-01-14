@@ -37,21 +37,22 @@ const FormatCurrentWeather = (data) => {
     return { lat, lon, temp, feels_like, temp_min, temp_max, humidity, name, dt, country, sunrise, details, icon, sunset, weather, speed };
 };
 
-const formatForecastWeather = (data) => {
+const formatForecastWeather = (data, timezone) => {
     if (!data) {
       return "Dati non validi";
     }
     
-    const daily = data.slice(1, 6).map(d => {
+    const daily = data.substr(1, 6).map(d => {
         const obj = {
           title: formatToLocalTime(d.dt, timezone, 'ccc'),
           temp: d.temp.day,
           icon: d.weather[0].icon,
         };
+
         return obj;
     });
     
-    const hourly = data.slice(1, 6).map(d => {
+    const hourly = data.substr(7, 6).map(d => {
         const obj = {
           title: formatToLocalTime(d.dt, timezone, 'hh:mm a'),
           temp: d.temp.day,
