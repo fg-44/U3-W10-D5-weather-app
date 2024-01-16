@@ -1,8 +1,11 @@
+import _ from 'lodash';
 const { DateTime } = require("luxon");
 
 // import { apiKey, baseURL } from './service/ApiKey'
-const baseURL = 'https://api.openweathermap.org/data/2.5';
+const baseURL = 'https://api.openweathermap.org/data/2.5/onecall?';
 const apiKey =  '18ad89837b9e2858246ade29a28a022d';
+
+//https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 
 
 
@@ -37,31 +40,33 @@ const FormatCurrentWeather = (data) => {
     return { lat, lon, temp, feels_like, temp_min, temp_max, humidity, name, dt, country, sunrise, details, icon, sunset, weather, speed };
 };
 
-const formatForecastWeather = (data, timezone) => {
+const formatForecastWeather = (data) => {
     if (!data) {
-      return "Dati non validi";
+    return "Dati non validi";
     }
+    let {timezone, daily, hourly} = data;
     
-    const daily = data.substr(1, 6).map(d => {
-        const obj = {
-          title: formatToLocalTime(d.dt, timezone, 'ccc'),
-          temp: d.temp.day,
-          icon: d.weather[0].icon,
-        };
-
-        return obj;
+    daily = daily.slice(1,6).map(d => {
+    return {
+    title: formatToLocalTime(d.dt, timezone, 'ccc'),
+    temp: d.temp.day,
+    icon: d.weather[0].icon,
+    };
     });
     
-    const hourly = data.substr(7, 6).map(d => {
-        const obj = {
+    hourly = hourly.slice(1, 6).map(d => {
+        return {
           title: formatToLocalTime(d.dt, timezone, 'hh:mm a'),
           temp: d.temp.day,
           icon: d.weather[0].icon,
         };
-        return obj;
+        
     });
+    return {timezone, daily, hourly}
 };
+
     
+
 
 const  getFormattedWeatherData  = async (searchParams) =>
  { const FormattedCurrentWeather = await getWeatherData
@@ -72,7 +77,7 @@ const  getFormattedWeatherData  = async (searchParams) =>
      const formattedForecastWeather = await getWeatherData ('onecall',{
         lat,
         lon, exclude: "current,minutely,alerts",
-        units: searchParams.units,
+        units: searchParams.units, // change the units
 
      }).then (formatForecastWeather)
      
