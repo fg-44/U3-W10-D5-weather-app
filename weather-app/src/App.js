@@ -22,9 +22,9 @@ function App() {
 
   useEffect(() => {
     const fetchWeather = async () => {
-      await getFormattedWeatherData({ ...query, units }).then(
-        (data) => {
-          setWeather(data);
+      await getFormattedWeatherData({...query, units})
+             .then((data) => {
+             setWeather(data);
         });
     };
 
@@ -49,6 +49,7 @@ function App() {
                 <Forecast title='Hourly Forecast' />
                 <Forecast title='Daily Forecast' />
               </div>
+              
             )}
 
 

@@ -10,8 +10,8 @@ function TimeLocations({weather:{dt, timezone, name, country}}) {
             <div className='d.flex justify-center my-6'>
                 <p className='text-white'>{
                 `${name},
-                 ${country} 
-                 `}</p>
+                 ${country}`
+                 }</p>
             </div>
         </div>
     )
