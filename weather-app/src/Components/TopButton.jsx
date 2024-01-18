@@ -35,7 +35,7 @@ function TopButton() {
 
       {cities.map((city) => (
 
-            <Button key={city.id} className='bg-transparent outline-none'>{city.title}</Button>
+            <Button key={city.id} className='bg-transparent border-0'>{city.title}</Button>
 )
       )}
 

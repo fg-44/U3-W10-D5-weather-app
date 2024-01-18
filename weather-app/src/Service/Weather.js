@@ -1,11 +1,12 @@
-import { apiKey, baseURL } from '../Service/ApyKey'
-
-
 const { DateTime } = require("luxon");
 
 // DATA YOU NEED ------------------------------------------
 
 const getWeatherData = async (infoType, searchParams) => {
+
+  const baseURL = "https://api.openweathermap.org/data/2.5";
+  const apiKey = "18ad89837b9e2858246ade29a28a022d";
+
   const url = new URL(baseURL + "/" + infoType);
   url.search = new URLSearchParams({
     ...searchParams,
@@ -21,7 +22,7 @@ const getWeatherData = async (infoType, searchParams) => {
 
 const formatCurrentWeather = (data) => {
   const {
-    coord: { lat, lon },
+    coord: { lat, lon } = data.coord,
     main: { temp, feels_like, temp_min, temp_max, humidity, speed },
     name,
     dt,
@@ -54,29 +55,36 @@ const formatCurrentWeather = (data) => {
 };
 
 const formatForecastWeather = (data) => {
-  if (!data) {
-    return "Dati non validi";
-  }
-  let { timezone, daily, hourly } = data;
-
-  daily = daily.slice(1, 6).map((d) => {
-    return {
-      title: formatToLocalTime(d.dt, timezone, "ccc"),
-      temp: d.temp.day,
-      icon: d.weather[0].icon,
-    };
-  });
-
-  hourly = hourly.slice(1, 6).map((d) => {
-    return {
-      title: formatToLocalTime(d.dt, timezone, "hh:mm a"),
-      temp: d.temp.day,
-      icon: d.weather[0].icon,
-    };
-  });
-
-  return { timezone, daily, hourly };
-};
+    if (!data) {
+      return "Dati non validi";
+    }
+    let { timezone, daily, hourly } = data;
+  
+    if (!daily) {
+      return "Dati non validi";
+    }
+    daily = daily.slice(1, 6).map((d) => {
+      return {
+        title: formatToLocalTime(d.dt, timezone, "ccc"),
+        temp: d.temp.day,
+        icon: d.weather[0].icon,
+      };
+    });
+  
+    if (!hourly) {
+      return "Dati non validi";
+    }
+    hourly = hourly.slice(1, 6).map((d) => {
+      return {
+        title: formatToLocalTime(d.dt, timezone, "hh:mm a"),
+        temp: d.temp.day,
+        icon: d.weather[0].icon,
+      };
+    });
+  
+    return { timezone, daily, hourly };
+  };
+  
 
 const getFormattedWeatherData = async (searchParams) => {
   const formattedCurrentWeather = await getWeatherData(
