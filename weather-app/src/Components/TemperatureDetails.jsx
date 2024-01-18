@@ -1,7 +1,7 @@
 import React from 'react'
 import { Sunset, Sunrise, Thermometer, ArrowDownRightSquare, ArrowUpRightSquare, Moisture, Wind } from 'react-bootstrap-icons'
 
-function TemperatureDetails() {
+function TemperatureDetails(weather: {}) {
   return (
 
     <div className='container'>
