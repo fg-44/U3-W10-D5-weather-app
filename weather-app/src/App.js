@@ -9,6 +9,7 @@ import TemperatureDetails from './Components/TemperatureDetails';
 import Forecast from './Components/Forecast';
 import Container from 'react-bootstrap/Container';
 
+
 //service
 import getFormattedWeatherData from './Service/Weather'
 import './App.css';

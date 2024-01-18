@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(39, 37, 37);
+}
+
 .App {
   width: 100%;
   text-align: center;
@@ -8,24 +12,38 @@
 }
 
 .App-header {
-
-  padding: 1rem ;
+  padding: 1rem;
   margin: 2rem;
   /*TOGLI MIN-WIDTH APPENA HAI COMPLETATO LA GRAFICA*/
   min-width: 50rem;
 
-  background: rgb(5,1,82);
-  background: -moz-linear-gradient(152deg, rgba(5,1,82,1) 0%, rgba(14,14,159,1) 51%, rgba(0,212,255,1) 100%);
-  background: -webkit-linear-gradient(152deg, rgba(5,1,82,1) 0%, rgba(14,14,159,1) 51%, rgba(0,212,255,1) 100%);
-  background: linear-gradient(152deg, rgba(5,1,82,1) 0%, rgba(14,14,159,1) 51%, rgba(0,212,255,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#050152",endColorstr="#00d4ff",GradientType=1); 
-  
+  background: rgb(142, 142, 156);
+  background: -moz-linear-gradient(
+    152deg,
+    rgba(142, 142, 156, 0.22) 0%,
+    rgba(158, 170, 172, 0.14729219324448528) 100%
+  );
+  background: -webkit-linear-gradient(
+    152deg,
+    rgba(142, 142, 156, 0.22) 0%,
+    rgba(158, 170, 172, 0.14729219324448528) 100%
+  );
+  background: linear-gradient(
+    152deg,
+    rgba(142, 142, 156, 0.22) 0%,
+    rgba(158, 170, 172, 0.14729219324448528) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#8e8e9c",endColorstr="#9eaaac",GradientType=1);
+
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.54);
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.54);
+
+  border-radius: 10px;
 
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
-button{
+button {
   background: transparent;
 }
-
