@@ -38,8 +38,8 @@ function App() {
         <div className='App'>
           <header className="App-header">
 
-            <TopButton></TopButton>
-            <Input></Input>
+            <TopButton setQuery={setQuery}/>
+            <Input setQuery={setQuery} units={units} setUnits={setUnits} />
 
             {weather && (
 
@@ -47,8 +47,8 @@ function App() {
                 <TimeLocation weather={weather}/>
                 <TemperatureDetails weather={weather}/>
 
-                <Forecast title='Hourly Forecast' />
-                <Forecast title='Daily Forecast' />
+                <Forecast title='Hourly Forecast' items={weather.hourly}/>
+                <Forecast title='Daily Forecast' items={weather.daily}/>
               </div>
               
             )}

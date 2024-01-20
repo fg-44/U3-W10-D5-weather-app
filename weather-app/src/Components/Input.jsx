@@ -2,7 +2,15 @@ import { Search, Compass } from 'react-bootstrap-icons'
 import Button from 'react-bootstrap/Button';
 import React from 'react'
 
-function input() {
+function input({setQuery, units, setUnits}) {
+
+    const {city, setCity} = useState("");
+
+    const handleSearchClick = () => {
+        if (city !== '') setQuery({q: city})
+        
+        }
+
     return (
         <div className="container">
             <div className="row">
@@ -10,7 +18,11 @@ function input() {
                     <div>
 
                         <div className='d.flex item-center flex-row justify-content-center'>
-                            <input type="text"
+                            <input
+                            value={city}
+                            onclick={(e) => setCity(e.currentTarget.value) } 
+                            
+                                type="text"
                                 placeholder='Search your city....'
                                 className='font-light' />
                         </div>

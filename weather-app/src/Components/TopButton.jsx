@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 
-function TopButton() {
+function TopButton({setQuery}) {
   const cities = [
     {
       id: 1,
@@ -35,7 +35,7 @@ function TopButton() {
 
       {cities.map((city) => (
 
-            <Button key={city.id} className='bg-transparent border-0'>{city.title}</Button>
+            <Button key={city.id} className='bg-transparent border-0' onClick={() => setQuery ({ q: city.title})}>{city.title}</Button>
 )
       )}
 
