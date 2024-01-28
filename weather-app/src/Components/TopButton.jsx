@@ -35,7 +35,7 @@ function TopButton({setQuery}) {
 
       {cities.map((city) => (
 
-            <Button key={city.id} className='bg-transparent border-0' onClick={() => setQuery ({ q: city.title})}>{city.title}</Button>
+            <Button key={city.id} className='bg-transparent border-0' onClick={() => setQuery({ q: city.title })}>{city.title}</Button>
 )
       )}
 

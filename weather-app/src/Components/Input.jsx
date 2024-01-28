@@ -1,15 +1,19 @@
 import { Search, Compass } from 'react-bootstrap-icons'
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import React from 'react'
 
-function input({setQuery, units, setUnits}) {
+function Input({setQuery, units, setUnits}) {
 
-    const {city, setCity} = useState("");
+    const [city, setCity] = useState("");
 
     const handleSearchClick = () => {
         if (city !== '') setQuery({q: city})
         
         }
+     
+
+        
 
     return (
         <div className="container">
@@ -20,7 +24,7 @@ function input({setQuery, units, setUnits}) {
                         <div className='d.flex item-center flex-row justify-content-center'>
                             <input
                             value={city}
-                            onclick={(e) => setCity(e.currentTarget.value) } 
+                            onChange={(e) => setCity(e.currentTarget.value) } 
                             
                                 type="text"
                                 placeholder='Search your city....'
@@ -31,8 +35,8 @@ function input({setQuery, units, setUnits}) {
                     <div className="row">
                         <div className='d-flex flex-row justify-content-center'>
                         <div>
-                            <Button className='bg-transparent border-0'><Search size={20} /></Button>
-                            <Button className='bg-transparent border-0'><Compass size={20}></Compass></Button>
+                            <Button className='bg-transparent border-0' onClick={handleSearchClick} ><Search size={20} /></Button>
+                            <Button className='bg-transparent border-0' ><Compass size={20}></Compass></Button>
                         </div>
                         <div className='d-flex item-center justify-content-center'>
                             <Button name='metric' className='bg-transparent border-0'>C</Button>
@@ -49,4 +53,4 @@ function input({setQuery, units, setUnits}) {
     )
 }
 
-export default input
+export default Input
