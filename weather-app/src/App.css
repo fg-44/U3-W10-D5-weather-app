@@ -14,8 +14,8 @@ body {
 .App-header {
   padding: 1rem;
   margin: 2rem;
-  /*TOGLI MIN-WIDTH APPENA HAI COMPLETATO LA GRAFICA*/
-  min-width: 50rem;
+  width: 50%;
+  min-width: 500px ;
 
   background: rgb(142, 142, 156);
   background: -moz-linear-gradient(

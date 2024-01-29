@@ -23,16 +23,17 @@ const getWeatherData = async (infoType, searchParams) => {
 const formatCurrentWeather = (data) => {
   const {
     coord: { lat, lon } = data.coord,
-    main: { temp, feels_like, temp_min, temp_max, humidity, speed },
+    main: { temp, feels_like, temp_min, temp_max, humidity},
     name,
     dt,
     sys: { country, sunrise, sunset },
     weather,
+    wind: {speed}
   } = data;
 
   if (!weather.length) return null;
 
-  const { main: details, icon } = weather;
+  const {main: details, icon } = weather[0];
 
   return {
     lat,
@@ -55,35 +56,44 @@ const formatCurrentWeather = (data) => {
 };
 
 const formatForecastWeather = (data) => {
-    if (!data) {
+  let { timezone, daily, hourly } = data;
+
+  if (!data) {
       return "Dati non validi";
-    }
-    let { timezone, daily, hourly } = data;
-  
-    if (!daily) {
+  }
+
+  daily = [];
+  if (!daily) {
       return "Dati non validi";
-    }
-    daily = daily.slice(1, 6).map((d) => {
+  }
+
+  hourly = [];
+  if (!hourly) {
+      return "Dati non validi";
+  }
+
+  daily = daily.slice(1, 6).map(d => {
       return {
-        title: formatToLocalTime(d.dt, timezone, "ccc"),
-        temp: d.temp.day,
-        icon: d.weather[0].icon,
+          title: formatToLocalTime(d.dt, timezone, "ccc"),
+          temp: d.temp.day,
+          icon: d.weather[0].icon
       };
-    });
-  
-    if (!hourly) {
+  });
+
+  if (!hourly) {
       return "Dati non validi";
-    }
-    hourly = hourly.slice(1, 6).map((d) => {
+  }
+
+  hourly = hourly.slice(1, 6).map(d => {
       return {
-        title: formatToLocalTime(d.dt, timezone, "hh:mm a"),
-        temp: d.temp,
-        icon: d.weather[0].icon,
+          title: formatToLocalTime(d.dt, timezone, "hh:mm a"),
+          temp: d.temp,
+          icon: d.weather[0].icon
       };
-    });
-  
-    return { timezone, daily, hourly };
-  };
+  });
+
+  return { timezone, daily, hourly };
+};
   
 
 const getFormattedWeatherData = async (searchParams) => {
@@ -107,8 +117,13 @@ const getFormattedWeatherData = async (searchParams) => {
 const formatToLocalTime = (
   secs,
   zone,
-  format = "cccc, dd LLL YYYY'| Local Time: 'hh:mm a"
-) => DateTime.fromSeconds(secs).setZone(zone).toFormat(format);
+  format = "cccc, LLL dd yyyy '| Local Time: 'hh:mm a"
+) => {
+  const dt = DateTime.fromSeconds(secs).setZone(zone)
+  const formattedDate = dt.toFormat(format);
+  return formattedDate;
+}
+
 
 const iconUrlFromCode = (code) =>
   `http://openweathermap.org/img/wn/${code}@2x.png`; // icons

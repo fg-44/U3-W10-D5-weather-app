@@ -1,4 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import { Container, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
 //Componenti 
@@ -7,12 +9,11 @@ import TopButton from './Components/TopButton';
 import Input from './Components/Input';
 import TemperatureDetails from './Components/TemperatureDetails';
 import Forecast from './Components/Forecast';
-import Container from 'react-bootstrap/Container';
 
 
 //service
 import getFormattedWeatherData from './Service/Weather'
-import './App.css';
+
 
 
 function App() {
@@ -35,8 +36,8 @@ function App() {
   return (
     <>
       <Container>
-        <div className='App'>
-          <header className="App-header">
+        <Row className="App">
+          <Col className="App-header">
 
             <TopButton setQuery={setQuery}/>
             <Input setQuery={setQuery} units={units} setUnits={setUnits} />
@@ -49,13 +50,14 @@ function App() {
 
                 <Forecast title='Hourly Forecast' items={weather.hourly}/>
                 <Forecast title='Daily Forecast' items={weather.daily}/>
+                
               </div>
               
             )}
 
 
-          </header>
-        </div>
+          </Col>
+        </Row>
 
       </Container >
     </>
